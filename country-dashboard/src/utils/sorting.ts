@@ -2,18 +2,20 @@
 import { Country } from "../types/Country";
 
 export const sortCountriesByPopulation = (
-  countries: Country[],
+  countries: Country[] | undefined,
   order: "asc" | "desc"
 ): Country[] => {
+  if (!Array.isArray(countries)) return [];
   return [...countries].sort((a, b) =>
     order === "asc" ? a.population - b.population : b.population - a.population
   );
 };
 
 export const sortCountriesByName = (
-  countries: Country[],
+  countries: Country[] | undefined,
   order: "asc" | "desc"
 ): Country[] => {
+  if (!Array.isArray(countries)) return [];
   return [...countries].sort((a, b) =>
     order === "asc"
       ? a.name.common.localeCompare(b.name.common)

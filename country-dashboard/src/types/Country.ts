@@ -1,14 +1,16 @@
 // Country Type Definition - types/Country.ts
 export interface Country {
-    name: {
+    names: {
       common: string;
       official: string;
     };
-    flags: {
-      png: string;
-      svg: string;
+    flag?: {
+      url_png: string;
+      url_svg: string;
     };
-    capital?: string[];
+    capitals?: {
+      name: string;
+    }[];
     population: number;
     region: string;
     currencies?: Record<string, { name: string; symbol: string }>;

@@ -1,16 +1,35 @@
 // Filtering Utility - utils/filtering.ts
 import { Country } from "../types/Country";
 
-export const filterCountriesByRegion = (countries: Country[], region: string): Country[] => {
+export const filterCountriesByRegion = (
+  countries: Country[] | undefined,
+  region: string
+): Country[] => {
+  if (!Array.isArray(countries)) return [];
   if (!region) return countries;
   return countries.filter((country) => country.region === region);
 };
 
-export const searchCountries = (countries: Country[], query: string): Country[] => {
+export const searchCountries = (
+  countries: Country[] | undefined,
+  query: string
+): Country[] => {
+  if (!Array.isArray(countries)) return [];
   if (!query) return countries;
-  return countries.filter(
-    (country) =>
-      country.name.common.toLowerCase().includes(query.toLowerCase()) ||
-      country.capital?.[0]?.toLowerCase().includes(query.toLowerCase())
-  );
+
+  const lowerQuery = query.toLowerCase();
+
+  return countries.filter((country) => {
+    try {
+      const countryName = country.names?.common || "";
+      const capital = country.capitals?.[0]?.name || "";
+
+      return (
+        countryName.toLowerCase().includes(lowerQuery) ||
+        capital.toLowerCase().includes(lowerQuery)
+      );
+    } catch (e) {
+      return false;
+    }
+  });
 };
