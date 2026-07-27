@@ -13,7 +13,9 @@ export interface Country {
     }[];
     population: number;
     region: string;
-    currencies?: Record<string, { name: string; symbol: string }>;
-    languages?: Record<string, string>;
+    subregion: string;
+    currencies?: Record<string, { name: string; symbol: string }>[];
+    languages?: Record<string, string>[];
     timezones: string[];
+    uuid: string;
   }

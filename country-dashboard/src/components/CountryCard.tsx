@@ -1,5 +1,6 @@
 import React from "react";
 import { Country } from "@/types/Country";
+import Image from "next/image";
 
 interface CountryCardProps {
   country: Country;
@@ -17,9 +18,11 @@ const CountryCard: React.FC<CountryCardProps> = ({
   return (
     <div className="card" onClick={onClick}>
       {flagSrc ? (
-        <img
+        <Image
           src={flagSrc}
           alt={country.names?.common}
+          width={320}
+          height={200}
           className="country-flag"
         />
       ) : (

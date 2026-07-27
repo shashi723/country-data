@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Country } from "../types/Country";
+import Image from "next/image";
 
 interface CountryDetailsProps {
   country: Country;
@@ -16,7 +17,7 @@ const CountryDetails: React.FC<CountryDetailsProps> = ({ country, onClose }) => 
       setLoaded(true);
       return;
     }
-    const img = new Image();
+    const img = new window.Image();
     img.src = flagSrc;
     img.onload = () => {
       if (!cancelled) setLoaded(true);
@@ -45,7 +46,7 @@ const CountryDetails: React.FC<CountryDetailsProps> = ({ country, onClose }) => 
         {loaded && (
           <div className="country-details">
             {flagSrc ? (
-              <img src={flagSrc} alt={country.names?.common || "flag"} className="country-flag" />
+              <Image src={flagSrc} alt={country.names?.common || "flag"} className="country-flag" width={320} height={200} />
             ) : (
               <div className="flag-placeholder">No flag available</div>
             )}
@@ -77,12 +78,12 @@ const CountryDetails: React.FC<CountryDetailsProps> = ({ country, onClose }) => 
 
               <p>
                 <strong>Languages:</strong>{" "}
-                {country.languages?.length ? country.languages.map((lang) => lang.name).join(", ") : "N/A"}
+                {Array.isArray(country.languages) && country.languages?.length ? country?.languages?.map((lang) => lang.name).join(", ") : "N/A"}
               </p>
 
               <p>
                 <strong>Currencies:</strong>{" "}
-                {country.currencies?.length
+                {Array.isArray(country.currencies) &&country.currencies?.length
                   ? country.currencies.map((currency) => `${currency.name} (${currency.symbol})`).join(", ")
                   : "N/A"}
               </p>

@@ -4,6 +4,9 @@ import React from "react";
 import { Country } from "../types/Country";
 import CountryDetails from "../components/CountryDetails";
 
+import countryData from "../data/country-data.json";
+const countriesData = countryData.data.objects;
+
 interface CountryPageProps {
   country: Country;
 }
@@ -22,21 +25,17 @@ export default CountryPage;
 
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const res = await fetch("https://restcountries.com/v3.1/all");
-    const countries: Country[] = await res.json();
-  
-    const paths = countries.map((country) => ({
-      params: { country: country.name.common.toLowerCase().replace(/\s+/g, "-") },
+   
+    const paths = countriesData.map((country) => ({
+      params: { country: country.names.common.toLowerCase().replace(/\s+/g, "-") },
     }));
   
     return { paths, fallback: false };
   };
   
   export const getStaticProps: GetStaticProps = async ({ params }) => {
-    const res = await fetch("https://restcountries.com/v3.1/all");
-    const countries: Country[] = await res.json();
-  
-    const country = countries.find((c) => c.name.common.toLowerCase().replace(/\s+/g, "-") === params?.country);
+
+    const country = countriesData.find((c) => c.names.common.toLowerCase().replace(/\s+/g, "-") === params?.country);
   
     if (!country) {
       return { notFound: true };

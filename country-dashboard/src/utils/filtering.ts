@@ -29,6 +29,7 @@ export const searchCountries = (
         capital.toLowerCase().includes(lowerQuery)
       );
     } catch (e) {
+      console.error("Error filtering countries:", e);
       return false;
     }
   });

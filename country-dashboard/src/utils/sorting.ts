@@ -18,7 +18,7 @@ export const sortCountriesByName = (
   if (!Array.isArray(countries)) return [];
   return [...countries].sort((a, b) =>
     order === "asc"
-      ? a.name.common.localeCompare(b.name.common)
-      : b.name.common.localeCompare(a.name.common)
+      ? a.names.common.localeCompare(b.names.common)
+      : b.names.common.localeCompare(a.names.common)
   );
 };
