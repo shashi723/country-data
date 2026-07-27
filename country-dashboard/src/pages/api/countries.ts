@@ -1,4 +1,3 @@
-// pages/api/countries.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
 // Import your local JSON file here
 import countryData from "../../data/country-data.json";
