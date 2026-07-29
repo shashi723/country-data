@@ -88,6 +88,10 @@ const Home = () => {
           <h1>Country Dashboard</h1>
         </div>
 
+        <div className="header-theme">
+          <DarkModeToggle />
+        </div>
+
         <div className="header-center">
           <SearchBar
             search={search}
@@ -102,8 +106,6 @@ const Home = () => {
             selectedRegion={selectedRegion}
             setSelectedRegion={setSelectedRegion}
           />
-
-          <DarkModeToggle />
         </div>
       </header>
 
